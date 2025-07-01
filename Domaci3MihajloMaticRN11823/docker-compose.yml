@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./backend
+    container_name: misa-backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:14
+    container_name: misa-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: chatapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
